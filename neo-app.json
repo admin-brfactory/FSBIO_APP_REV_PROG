@@ -19,19 +19,19 @@
 		},
 		"description": "SAPUI5 Test Resources"
 	}, {
-		"path": "/S4D",
+		"path": "/FID",
 		"target": {
 			"type": "destination",
-			"name": "S4D"
+			"name": "FID"
 		},
-		"description": "S4D - S/4 DEV fsBioenergia"
+		"description": "FID - FIORI DEV fsBioenergia"
 	}, {
 		"path": "/sap/opu/odata",
 		"target": {
 			"type": "destination",
-			"name": "S4D",
+			"name": "FID",
 			"entryPath": "/sap/opu/odata"
 		},
-		"description": "S4D"
+		"description": "FID"
 	}]
 }
