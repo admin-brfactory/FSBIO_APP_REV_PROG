@@ -1,0 +1,36 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZSD_GW_REV_PROG_SRV" xml:lang="pt" sap:schema-version="1">
+            <EntityType Name="GET_DADOS_PROG" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PLANTA"/>
+                    <PropertyRef Name="VENDEDOR"/>
+                    <PropertyRef Name="DATA_INI"/>
+                    <PropertyRef Name="DATA_FIM"/>
+                    <PropertyRef Name="USUARIO"/>
+                </Key>
+                <Property Name="PLANTA" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Planta" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VENDEDOR" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Vendedor" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_INI" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Data de inicio" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_FIM" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Data Fim" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TAB_RESUMO" Type="Edm.String" sap:unicode="false" sap:label="Tabela de resumo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TAB_PROGS" Type="Edm.String" sap:unicode="false" sap:label="Tablea de programacoes" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LIST_PLANTAS" Type="Edm.String" sap:unicode="false" sap:label="Lista de plantas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LIST_VENDEDORES" Type="Edm.String" sap:unicode="false" sap:label="Lista de vendedores" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="USUARIO" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Usuario logado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TIPO_USUARIO" Type="Edm.String" sap:unicode="false" sap:label="Tipo de usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZSD_GW_REV_PROG_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="GET_DADOS_PROGSet" EntityType="ZSD_GW_REV_PROG_SRV.GET_DADOS_PROG" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/opu/odata/sap/ZSD_GW_REV_PROG_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/opu/odata/sap/ZSD_GW_REV_PROG_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

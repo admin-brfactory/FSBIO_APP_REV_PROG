@@ -1,0 +1,9 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
+	<Dialog title="{i18n>dialogTrocarTitle}" id="dialogTrocar">
+		<u:FileUploader id="UpTrocaTab" fileType="xlsx" change="fileUploader" name="UploadExcel" uploadUrl="upload/" tooltip="{i18n>uptooltip}"
+			buttonText="Upload" icon="sap-icon://upload" class="sapUiSmallMarginTop sapUiMediumMarginBegin"/>
+		<endButton>
+			<Button text="{i18n>btnTrcarCancelar}" press="dialogTrocarCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

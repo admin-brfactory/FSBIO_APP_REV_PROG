@@ -1,0 +1,84 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:table="sap.ui.table">
+	<Dialog title="{i18n>TitleRelatUF}" id="dialogRelatUF" contentWidth="100%" contentHeight="100%">
+		<table:Table id="RelatUFTable" selectionMode="None" rows="{revisaoView>/tabRelatUF}" visibleRowCount="21">
+			<table:extension>
+				<OverflowToolbar>
+					<Title titleStyle="H4" text="Itens({revisaoView>/tabRelatUFCount})" />
+					<Label text="{i18n>lblCaminhao}"/>
+					<Select id="relatUFCaminhao" items="{revisaoView>/listCaminhoes}">
+						<core:Item key="{revisaoView>KEY}" text="{revisaoView>DESC_CAMINHAO}"/>
+					</Select>
+					<Label text="{i18n>lblProduto}"/>
+					<Select id="relatUFProduto" items="{revisaoView>/listProdutos}">
+						<core:Item key="{revisaoView>KEY}" text="{revisaoView>DESC_PRODUTO}"/>
+					</Select>
+					<Label text="{i18n>lblPlanta}"/>
+					<Select id="relatUFPlanta" items="{revisaoView>/listaPlantas}">
+						<core:Item key="{revisaoView>KEY}" text="{revisaoView>PLANTA}"/>
+					</Select>
+					<Label text="{i18n>lblInctoterm}"/>
+					<Select id="relatUFIncoterm" items="{revisaoView>/listIncoterm}">
+						<core:Item key="{revisaoView>KEY}" text="{revisaoView>DESC_INCOTERM}"/>
+					</Select>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://search" id="FiltrarPesquisaUf" text="{i18n>btnSearch}" tooltip="{i18n>btnSearch}" press="onBuscarRelatUF"/>
+					<Button icon="sap-icon://excel-attachment" id="ExportRelatUf" text="{i18n>btnExport}" tooltip="{i18n>btnExport}"
+						press="exportExcel('/tabRelatUFExport')"/>
+				</OverflowToolbar>
+			</table:extension>
+			<table:columns>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnUF}"/>
+					<table:template>
+						<Text text="{revisaoView>UF}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnData}"/>
+					<table:template>
+						<Text text="{ path: 'revisaoView>DATA', formatter: '.formatter.formatDate'}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnProduto}"/>
+					<table:template>
+						<Text text="{revisaoView>PRODUTO}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnPlant}"/>
+					<table:template>
+						<Text text="{revisaoView>PLANTA}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnIncoterm}"/>
+					<table:template>
+						<Text text="{revisaoView>INCOTERM}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCarga}"/>
+					<table:template>
+						<Text text="{revisaoView>CARGA}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnTpVei}"/>
+					<table:template>
+						<Text text="{revisaoView>TIPO_VEICULO}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnNCargas}"/>
+					<table:template>
+						<Text text="{revisaoView>N_CARGAS}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+		<endButton>
+			<Button text="{i18n>btnFechar}" press="onCloseRelatUf"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

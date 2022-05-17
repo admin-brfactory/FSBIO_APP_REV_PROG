@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:table="sap.ui.table"
+	xmlns:u="sap.ui.unified">
+	<Dialog id="messageList" class="sapUiContentPadding" showHeader="false">
+		<OverflowToolbar>
+			<ToolbarSpacer/>
+			<Title text="{i18n>listErro}"/>
+			<ToolbarSpacer/>
+			<OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="onCloseDialog('messageList')"/>
+		</OverflowToolbar>
+		<List items="{ path: 'revisaoView>/listaErros' }">
+			<StandardListItem title="{revisaoView>MESSAGE}"/>
+		</List>
+	</Dialog>
+</core:FragmentDefinition>

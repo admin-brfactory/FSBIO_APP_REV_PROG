@@ -1,0 +1,266 @@
+<mvc:View controllerName="com.fsBioenergiaZ_REV_PROG.controller.Main" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" showHeader="false">
+				<content>
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd">
+						<table:TreeTable id="TreeTableProd" rows="{path:'revisaoView>/Produtos/catalog/produtos', parameters: {arrayNames:['categories']}}"
+							selectionMode="None" enableSelectAll="false" ariaLabelledBy="title" class="sapUiMediumMarginTop styleTable">
+							<table:extension>
+								<OverflowToolbar>
+									<HBox alignItems="Center">
+										<Label text="{i18n>lblPlanta}"/>
+										<Select id="filtroPlanta" class="sapUiTinyMarginBegin" items="{revisaoView>/listaPlantas}">
+											<core:Item key="{revisaoView>KEY}" text="{revisaoView>PLANTA}"/>
+										</Select>
+									</HBox>
+									<HBox alignItems="Center" class="sapUiSmallMarginBegin">
+										<Label text="{i18n>lblVendedor}"/>
+										<Select id="filtroVendedor" class="sapUiTinyMarginBegin" items="{revisaoView>/listaVendedores}">
+											<core:Item key="{revisaoView>KEY}" text="{revisaoView>VENDEDOR}"/>
+										</Select>
+									</HBox>
+									<HBox alignItems="Center" class="sapUiSmallMarginBegin">
+										<Label text="{i18n>lblDe}"/>
+										<DatePicker id="dataIni" class="sapUiTinyMarginBegin" displayFormat="dd/MM/yyyy"/>
+									</HBox>
+									<HBox alignItems="Center" class="sapUiSmallMarginBegin">
+										<Label text="{i18n>lblAte}"/>
+										<DatePicker id="dataFim" class="sapUiTinyMarginBegin" displayFormat="dd/MM/yyyy"/>
+									</HBox>
+									<ToolbarSpacer/>
+									<Button icon="sap-icon://search" id="Pesquisar" text="{i18n>btnSearch}" tooltip="{i18n>btnSearch}" press="onClickSearchProg"/>
+									<Button icon="sap-icon://excel-attachment" id="ExportExcel" text="{i18n>btnExport}" tooltip="{i18n>btnExport}"
+										press="exportExcel('/dadosProgExport')"/>
+									<Button icon="sap-icon://expand-all" id="expd" text="{i18n>btnexpdAll}" tooltip="{i18n>btnexpdAll}"
+										press="onPressExpdColps('EXPANDIR', 'TreeTableProd')"/>
+									<Button icon="sap-icon://collapse-all" id="colps" text="{i18n>btnColAll}" tooltip="{i18n>btnColAll}"
+										press="onPressExpdColps('COLAPSAR', 'TreeTableProd')"/>
+								</OverflowToolbar>
+							</table:extension>
+							<table:columns>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnProd}"/>
+									<table:template>
+										<Text text="{revisaoView>name}" wrapping="false"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnDOM}"/>
+									<table:template>
+										<Text text="{revisaoView>DOM}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnSEG}"/>
+									<table:template>
+										<Text text="{revisaoView>SEG}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnTER}"/>
+									<table:template>
+										<Text text="{revisaoView>TER}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnQUA}"/>
+									<table:template>
+										<Text text="{revisaoView>QUA}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnQUI}"/>
+									<table:template>
+										<Text text="{revisaoView>QUI}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnSEX}"/>
+									<table:template>
+										<Text text="{revisaoView>SEX}"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnSAB}"/>
+									<table:template>
+										<Text text="{revisaoView>SAB}"/>
+									</table:template>
+								</table:Column>
+							</table:columns>
+						</table:TreeTable>
+						<table:Table id="ProgTable" selectionMode="None" selectionBehavior="Row" enableSelectAll="true" rows="{revisaoView>/dadosProg}"
+							class="sapUiSmallMarginTop styleTable" visibleRowCount="10">
+							<table:extension>
+								<OverflowToolbar>
+									<Title titleStyle="H3" text="Itens({revisaoView>/dadosProgCount})"/>
+								</OverflowToolbar>
+							</table:extension>
+							<table:columns>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnCodClie}"/>
+									<table:template>
+										<Text text="{revisaoView>COD_CLIE}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnClie}"/>
+									<table:template>
+										<Text text="{revisaoView>CLIENTE}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnCidade}"/>
+									<table:template>
+										<Text text="{revisaoView>CIDADE}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnUF}"/>
+									<table:template>
+										<Text text="{revisaoView>UF}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnCIF_FOB}"/>
+									<table:template>
+										<Text text="{revisaoView>CIF_FOB}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columntipoCaminhao}"/>
+									<table:template>
+										<Text text="{revisaoView>TIPO_CAMINHAO}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnProd}"/>
+									<table:template>
+										<Text text="{revisaoView>PRODUTO}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnPlanta}"/>
+									<table:template>
+										<Input value="{revisaoView>PLANTA}"></Input>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnVendedor}"/>
+									<table:template>
+										<Text text="{revisaoView>VENDEDOR}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnData}"/>
+									<table:template>
+										<DatePicker value="{revisaoView>DATA}" displayFormat="dd/MM/yyyy"/>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnVolume}"/>
+									<table:template>
+										<Input type="Number" value="{revisaoView>VOLUME}" liveChange="checaNumerico"></Input>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnTipo}"/>
+									<table:template>
+										<Text text="{revisaoView>TIPO}" wrapping="false"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<Label text="{i18n>columnJust}"/>
+									<table:template>
+										<Text text="{revisaoView>JUSTIFICATIVA}" wrapping="true"></Text>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<l:HorizontalLayout>
+										<Label text="{i18n>columnPlanejamento}" class="sapUiTinyMarginTop"/>
+										<CheckBox id="aprvPlanej" select="onClickAprovarTodos('aprvPlanej')"/>
+									</l:HorizontalLayout>
+									<table:template>
+										<l:VerticalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_PLANEJAMENTO', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>APR_PLANEJAMENTO', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_PLANEJAMENTO', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>RJ_PLANEJAMENTO', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+										</l:VerticalLayout>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<l:HorizontalLayout>
+										<Label text="{i18n>columnComercial}" class="sapUiTinyMarginTop"/>
+										<CheckBox id="aprvComer" select="onClickAprovarTodos('aprvComer')"/>
+									</l:HorizontalLayout>
+									<table:template>
+										<l:VerticalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_COMERCIAL', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>APR_COMERCIAL', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_COMERCIAL', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>RJ_COMERCIAL', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+										</l:VerticalLayout>
+									</table:template>
+								</table:Column>
+								<table:Column width="auto" hAlign="Center">
+									<l:HorizontalLayout>
+										<Label text="{i18n>columnLogist}" class="sapUiTinyMarginTop"/>
+										<CheckBox id="aprvlogist" select="onClickAprovarTodos('aprvlogist')"/>
+									</l:HorizontalLayout>
+									<table:template>
+										<l:VerticalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_LOGISTICA', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>APR_LOGISTICA', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+											<l:HorizontalLayout>
+												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
+												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_LOGISTICA', formatter: '.formatter.checkBoxEnabled'}"
+													selected="{path: 'revisaoView>RJ_LOGISTICA', formatter: '.formatter.formatCheckBox'}"/>
+											</l:HorizontalLayout>
+										</l:VerticalLayout>
+									</table:template>
+								</table:Column>
+							</table:columns>
+						</table:Table>
+					</VBox>
+				</content>
+				<footer>
+					<OverflowToolbar>
+						<content>
+							<ToolbarSpacer/>
+							<MenuButton text="{i18n>btnMenuRelatorios}" type="Ghost" icon="sap-icon://activity-individual">
+								<menu>
+									<Menu>
+										<MenuItem text="{i18n>btnRelatSeman}" id="relatorioSemanal" icon="sap-icon://activity-2" press="onBuscarRelatSem"/>
+										<MenuItem text="{i18n>btnRelatAcum}" id="relatorioAcumulado" icon="sap-icon://add-activity-2" press="onBuscarRelatMens"/>
+										<MenuItem text="{i18n>btnRelatUF}" id="relatorioUF" icon="sap-icon://add-activity-2" press="onBuscarRelatUF"/>
+									</Menu>
+								</menu>
+							</MenuButton>
+							<Button text="{i18n>btnGravar}" type="Ghost" press="onGravarDadosProg"/>
+							<Button text="{i18n>btnAprovar}" type="Ghost" press="onAprovar" visible="false"/>
+							<Button text="{i18n>btnRejeitar}" type="Ghost" press="onRejeitar" visible="false"/>
+							<Button text="{i18n>btnTrocar}" type="Ghost" press="onTrocar"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,129 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:table="sap.ui.table"
+	xmlns:u="sap.ui.unified">
+	<Dialog id="TabUpld" class="sapUiContentPadding" title="{i18n>dialogTrocarTitle}" contentWidth="100%" contentHeight="100%">
+		<table:Table inset="false" rows="{revisaoView>/excelData}" selectionMode="None" id="tabDeUpload" visibleRowCount="22">
+			<table:columns>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCodClie}"/>
+					<table:template>
+						<Text text="{revisaoView>COD_CLIE}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnClie}"/>
+					<table:template>
+						<Text text="{revisaoView>CLIENTE}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCidade}"/>
+					<table:template>
+						<Text text="{revisaoView>CIDADE}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnUF}"/>
+					<table:template>
+						<Text text="{revisaoView>UF}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCIF_FOB}"/>
+					<table:template>
+						<Text text="{revisaoView>CIF_FOB}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columntipoCaminhao}"/>
+					<table:template>
+						<Text text="{revisaoView>TIPO_CAMINHAO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnProd}"/>
+					<table:template>
+						<Text text="{revisaoView>PRODUTO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnPlanta}"/>
+					<table:template>
+						<Text text="{revisaoView>PLANTA}"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnVendedor}"/>
+					<table:template>
+						<Text text="{revisaoView>VENDEDOR}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnData}"/>
+					<table:template>
+						<Text text="{revisaoView>DATA}"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnVolume}"/>
+					<table:template>
+						<Text text="{revisaoView>VOLUME}"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnTipo}"/>
+					<table:template>
+						<Text text="{revisaoView>TIPO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnJust}"/>
+					<table:template>
+						<Text text="{revisaoView>JUSTIFICATIVA}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnAprPlan}"/>
+					<table:template>
+						<Text text="{revisaoView>APR_PLANEJAMENTO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnRejPlan}"/>
+					<table:template>
+						<Text text="{revisaoView>RJ_PLANEJAMENTO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnAprComer}"/>
+					<table:template>
+						<Text text="{revisaoView>APR_COMERCIAL}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnRejComer}"/>
+					<table:template>
+						<Text text="{revisaoView>RJ_COMERCIAL}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnAprLogist}"/>
+					<table:template>
+						<Text text="{revisaoView>APR_LOGISTICA}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="13rem" hAlign="Center">
+					<Label text="{i18n>columnRejLogist}"/>
+					<table:template>
+						<Text text="{revisaoView>RJ_LOGISTICA}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+		<beginButton>
+			<Button text="{i18n>btnTrcarConfirm}" width="130px" class="sapUiTinyMarginBeginEnd" press="onConfirmTroca" type="Ghost"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>btnTrcarCancelar}" width="130px" class="sapUiTinyMarginBeginEnd" press="onPrevExcelDataCancel" type="Ghost"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

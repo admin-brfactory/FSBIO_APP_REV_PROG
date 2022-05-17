@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:table="sap.ui.table">
+	<Dialog title="{i18n>relatTitle}" id="dialogRelatSemAcum" contentWidth="100%" contentHeight="100%">
+		<table:TreeTable id="TreeTableRelat" rows="{path:'revisaoView>/Relatorio/catalog/relatorio', parameters: {arrayNames:['categories']}}"
+			selectionMode="None" enableSelectAll="false" ariaLabelledBy="title" class="sapUiMediumMarginTop" visibleRowCount="20">
+			<table:extension>
+				<OverflowToolbar>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://excel-attachment" id="ExportTreeTable" text="{i18n>btnExport}" tooltip="{i18n>btnExport}" press="onDownload"/>
+					<Button icon="sap-icon://expand-all" id="expdRelat" text="{i18n>btnexpdAll}" tooltip="{i18n>btnexpdAll}"
+						press="onPressExpdColps('EXPANDIR', 'TreeTableRelat')"/>
+					<Button icon="sap-icon://collapse-all" id="colpsRelat" text="{i18n>btnColAll}" tooltip="{i18n>btnColAll}"
+						press="onPressExpdColps('COLAPSAR', 'TreeTableRelat')"/>
+				</OverflowToolbar>
+			</table:extension>
+			<table:columns>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnProd}"/>
+					<table:template>
+						<Text text="{revisaoView>name}" wrapping="false"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCota}"/>
+					<table:template>
+						<Text text="{revisaoView>COTA}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnProgramado}"/>
+					<table:template>
+						<Text text="{revisaoView>PROGRAMADO}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnFaturado}"/>
+					<table:template>
+						<Text text="{revisaoView>FATURADO}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnTotal}"/>
+					<table:template>
+						<Text text="{revisaoView>TOTAL}"/>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnSaldo}"/>
+					<table:template>
+						<Text text="{revisaoView>SALDO}"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:TreeTable>
+		<endButton>
+			<Button text="{i18n>btnFechar}" press="onCloseRelatSemanAcumulado"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
