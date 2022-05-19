@@ -143,7 +143,7 @@
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnPlanta}"/>
 									<table:template>
-										<Input value="{revisaoView>PLANTA}"></Input>
+										<Text text="{revisaoView>PLANTA}" wrapping="false"></Text>
 									</table:template>
 								</table:Column>
 								<table:Column width="auto" hAlign="Center">
@@ -155,7 +155,7 @@
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnData}"/>
 									<table:template>
-										<DatePicker value="{revisaoView>DATA}" displayFormat="dd/MM/yyyy"/>
+										<Text text="{ path: 'revisaoView>DATA', formatter: '.formatter.formatDate'}" wrapping="false"></Text>
 									</table:template>
 								</table:Column>
 								<table:Column width="auto" hAlign="Center">
@@ -167,13 +167,19 @@
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnTipo}"/>
 									<table:template>
-										<Text text="{revisaoView>TIPO}" wrapping="false"></Text>
+										<!--<Text text="{revisaoView>TIPO}" wrapping="false"></Text>-->
+										<Select width="11rem" selectedKey="{revisaoView>TIPO}" items="{ path: 'revisaoView>/listaTiposCota'}">
+											<core:Item key="{progView>KEY}" text="{progView>DESC_TIPO}"/>
+										</Select>
 									</table:template>
 								</table:Column>
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnJust}"/>
 									<table:template>
-										<Text text="{revisaoView>JUSTIFICATIVA}" wrapping="true"></Text>
+										<!--<Text text="{revisaoView>JUSTIFICATIVA}" wrapping="true"></Text>-->
+										<Select width="11rem" selectedKey="{revisaoView>JUSTIFICATIVA}" items="{ path: 'revisaoView>/listaJustificativa'}">
+											<core:Item key="{progView>ID_JUSTIFICATIVA}" text="{progView>JUSTIFICATIVA}"/>
+										</Select>
 									</table:template>
 								</table:Column>
 								<table:Column width="auto" hAlign="Center">

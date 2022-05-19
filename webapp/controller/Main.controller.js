@@ -40,6 +40,8 @@ sap.ui.define([
 				listProdutos: [],
 				listCaminhoes: [],
 				listIncoterm: [],
+				listaJustificativa: [],
+				listaTiposCota: [],
 				tabRelatUF: [],
 				tabRelatUFCount: 0,
 				tabRelatUFExport: [],
@@ -136,6 +138,24 @@ sap.ui.define([
 						})
 						oViewModel.setProperty("/listaVendedores", listaVendedores);
 					}
+					
+					if (oData.LIST_JUSTIFICATIVA != "[]") {
+						var listaJustificativa = JSON.parse(oData.LIST_JUSTIFICATIVA);
+						listaJustificativa.unshift({
+							ID_JUSTIFICATIVA: "",
+							JUSTIFICATIVA: ""
+						})
+						oViewModel.setProperty("/listaJustificativa", listaJustificativa);
+					}
+					
+					if (oData.LIST_TIPOS != "[]") {
+						var listaTiposCota = JSON.parse(oData.LIST_TIPOS);
+						listaVendedores.unshift({
+							KEY: "",
+							DESC_TIPO: ""
+						})
+						oViewModel.setProperty("/listaTiposCota", listaTiposCota);
+					}
 
 					if (oData.TIPO_USUARIO != "") {
 						oViewModel.setProperty("/tipoUsuario", oData.TIPO_USUARIO);
@@ -154,6 +174,8 @@ sap.ui.define([
 		onBuscarRelatMens: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
+			var planta = this.getView().byId("filtroPlanta").getSelectedKey();
+			var vendedor = this.getView().byId("filtroVendedor").getSelectedKey();
 			var dataIni = this.getView().byId("dataIni").getDateValue();
 			var dataFim = this.getView().byId("dataFim").getDateValue();
 			var Dates = this.validaData(dataIni, dataFim);
@@ -165,7 +187,7 @@ sap.ui.define([
 			dataIni = Dates[0];
 			dataFim = Dates[1];
 
-			var sURL = "/GET_RELAT_MENSSet(DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
+			var sURL = "/GET_RELAT_MENSSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
 
 			sap.ui.core.BusyIndicator.show();
 			oModel.read(sURL, {
@@ -210,6 +232,8 @@ sap.ui.define([
 		onBuscarRelatSem: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
+			var planta = this.getView().byId("filtroPlanta").getSelectedKey();
+			var vendedor = this.getView().byId("filtroVendedor").getSelectedKey();
 			var dataIni = this.getView().byId("dataIni").getDateValue();
 			var dataFim = this.getView().byId("dataFim").getDateValue();
 			var Dates = this.validaData(dataIni, dataFim);
@@ -221,7 +245,7 @@ sap.ui.define([
 			dataIni = Dates[0];
 			dataFim = Dates[1];
 
-			var sURL = "/GET_RELAT_SEMANSet(DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
+			var sURL = "/GET_RELAT_SEMANSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
 
 			sap.ui.core.BusyIndicator.show();
 			oModel.read(sURL, {
@@ -1029,6 +1053,11 @@ sap.ui.define([
 				type: EdmType.String,
 				width: '20'
 			}, {
+				label: 'COD_PROD',
+				property: 'COD_PROD',
+				type: EdmType.String,
+				width: '20'
+			}, {
 				label: 'PRODUTO',
 				property: 'PRODUTO',
 				type: EdmType.String,
@@ -1036,6 +1065,11 @@ sap.ui.define([
 			}, {
 				label: 'PLANTA',
 				property: 'PLANTA',
+				type: EdmType.String,
+				width: '20'
+			}, {
+				label: 'COD_VEND',
+				property: 'COD_VEND',
 				type: EdmType.String,
 				width: '20'
 			}, {
