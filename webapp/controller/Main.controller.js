@@ -31,6 +31,10 @@ sap.ui.define([
 					}
 				},
 				
+				plantaSelecionado: "",
+				dataIniSelecionado: "",
+				dataFimSelecionado: "", 
+				vendedorSelecionado: "",
 				dadosProgCount: 0,
 				dadosProg: [],
 				dadosProgForCompare: [],
@@ -80,11 +84,15 @@ sap.ui.define([
 		onSearchProg: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
-			var usuario = sap.ushell.Container.getService("UserInfo").getId();
-			var planta = this.getView().byId("filtroPlanta").getSelectedKey();
-			var vendedor = this.getView().byId("filtroVendedor").getSelectedKey();
-			var dataIni = this.getView().byId("dataIni").getDateValue();
-			var dataFim = this.getView().byId("dataFim").getDateValue();
+			oViewModel.setProperty("/plantaSelecionado", this.getView().byId("filtroPlanta").getSelectedKey());
+			oViewModel.setProperty("/vendedorSelecionado", this.getView().byId("filtroVendedor").getSelectedKey());
+			oViewModel.setProperty("/dataIniSelecionado", this.getView().byId("dataIni").getDateValue());
+			oViewModel.setProperty("/dataFimSelecionado", this.getView().byId("dataFim").getDateValue());
+			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
+			var planta = oViewModel.getProperty("/plantaSelecionado");
+			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
+			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
+			var dataFim = oViewModel.getProperty("/dataFimSelecionado");
 			var Dates = this.validaData(dataIni, dataFim);
 
 			if (Dates == "Error") {
@@ -119,6 +127,11 @@ sap.ui.define([
 						oViewModel.setProperty("/dadosProgExport", tabProgExport);
 						oViewModel.setProperty("/dadosProgCount", tabProg.length);
 						this.trataDadosExport("/dadosProgExport");
+					} else {
+						oViewModel.setProperty("/dadosProg", []);
+						oViewModel.setProperty("/dadosProgForCompare", []);
+						oViewModel.setProperty("/dadosProgExport", []);
+						oViewModel.setProperty("/dadosProgCount", tabProg.length);
 					}
 
 					if (oData.LIST_PLANTAS != "[]") {
@@ -150,7 +163,7 @@ sap.ui.define([
 					
 					if (oData.LIST_TIPOS != "[]") {
 						var listaTiposCota = JSON.parse(oData.LIST_TIPOS);
-						listaVendedores.unshift({
+						listaTiposCota.unshift({
 							KEY: "",
 							DESC_TIPO: ""
 						})
@@ -174,10 +187,10 @@ sap.ui.define([
 		onBuscarRelatMens: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
-			var planta = this.getView().byId("filtroPlanta").getSelectedKey();
-			var vendedor = this.getView().byId("filtroVendedor").getSelectedKey();
-			var dataIni = this.getView().byId("dataIni").getDateValue();
-			var dataFim = this.getView().byId("dataFim").getDateValue();
+			var planta = oViewModel.getProperty("/plantaSelecionado");
+			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
+			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
+			var dataFim = oViewModel.getProperty("/dataFimSelecionado");
 			var Dates = this.validaData(dataIni, dataFim);
 
 			if (Dates == "Error") {
@@ -232,10 +245,10 @@ sap.ui.define([
 		onBuscarRelatSem: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
-			var planta = this.getView().byId("filtroPlanta").getSelectedKey();
-			var vendedor = this.getView().byId("filtroVendedor").getSelectedKey();
-			var dataIni = this.getView().byId("dataIni").getDateValue();
-			var dataFim = this.getView().byId("dataFim").getDateValue();
+			var planta = oViewModel.getProperty("/plantaSelecionado");
+			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
+			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
+			var dataFim = oViewModel.getProperty("/dataFimSelecionado");
 			var Dates = this.validaData(dataIni, dataFim);
 
 			if (Dates == "Error") {
@@ -289,7 +302,7 @@ sap.ui.define([
 		onBuscarRelatUF: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
-			var usuario = sap.ushell.Container.getService("UserInfo").getId();
+			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
 			var produto = this.getView().byId("relatUFProduto");
 			var caminhao = this.getView().byId("relatUFCaminhao");
 			var planta = this.getView().byId("relatUFPlanta");
