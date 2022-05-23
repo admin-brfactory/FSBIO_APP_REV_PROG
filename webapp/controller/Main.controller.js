@@ -88,7 +88,7 @@ sap.ui.define([
 			oViewModel.setProperty("/vendedorSelecionado", this.getView().byId("filtroVendedor").getSelectedKey());
 			oViewModel.setProperty("/dataIniSelecionado", this.getView().byId("dataIni").getDateValue());
 			oViewModel.setProperty("/dataFimSelecionado", this.getView().byId("dataFim").getDateValue());
-			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
+			var usuario = sap.ushell.Container.getService("UserInfo").getId();
 			var planta = oViewModel.getProperty("/plantaSelecionado");
 			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
 			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
@@ -302,7 +302,7 @@ sap.ui.define([
 		onBuscarRelatUF: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
-			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
+			var usuario = sap.ushell.Container.getService("UserInfo").getId();
 			var produto = this.getView().byId("relatUFProduto");
 			var caminhao = this.getView().byId("relatUFCaminhao");
 			var planta = this.getView().byId("relatUFPlanta");
