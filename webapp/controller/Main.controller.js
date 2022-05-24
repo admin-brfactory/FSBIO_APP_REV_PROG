@@ -88,7 +88,7 @@ sap.ui.define([
 			oViewModel.setProperty("/vendedorSelecionado", this.getView().byId("filtroVendedor").getSelectedKey());
 			oViewModel.setProperty("/dataIniSelecionado", this.getView().byId("dataIni").getDateValue());
 			oViewModel.setProperty("/dataFimSelecionado", this.getView().byId("dataFim").getDateValue());
-			var usuario = sap.ushell.Container.getService("UserInfo").getId();
+			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
 			var planta = oViewModel.getProperty("/plantaSelecionado");
 			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
 			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
@@ -131,7 +131,7 @@ sap.ui.define([
 						oViewModel.setProperty("/dadosProg", []);
 						oViewModel.setProperty("/dadosProgForCompare", []);
 						oViewModel.setProperty("/dadosProgExport", []);
-						oViewModel.setProperty("/dadosProgCount", tabProg.length);
+						oViewModel.setProperty("/dadosProgCount", 0);
 					}
 
 					if (oData.LIST_PLANTAS != "[]") {

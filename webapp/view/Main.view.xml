@@ -167,16 +167,16 @@
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnTipo}"/>
 									<table:template>
-										<Select width="11rem" selectedKey="{revisaoView>TIPO}" items="{ path: 'revisaoView>/listaTiposCota'}">
-											<core:Item key="{revisaoView>DESC_TIPO}" text="{revisaoView>DESC_TIPO}"/>
+										<Select width="11rem" selectedKey="{revisaoView>COD_TIPO}" items="{ path: 'revisaoView>/listaTiposCota'}">
+											<core:Item key="{revisaoView>KEY}" text="{revisaoView>DESC_TIPO}"/>
 										</Select>
 									</table:template>
 								</table:Column>
 								<table:Column width="auto" hAlign="Center">
 									<Label text="{i18n>columnJust}"/>
 									<table:template>
-										<Select width="11rem" selectedKey="{revisaoView>JUSTIFICATIVA}" items="{ path: 'revisaoView>/listaJustificativa'}">
-											<core:Item key="{revisaoView>JUSTIFICATIVA}" text="{revisaoView>JUSTIFICATIVA}"/>
+										<Select width="11rem" selectedKey="{revisaoView>ID_JUSTIFICATIVA}" items="{ path: 'revisaoView>/listaJustificativa'}">
+											<core:Item key="{revisaoView>ID_JUSTIFICATIVA}" text="{revisaoView>JUSTIFICATIVA}"/>
 										</Select>
 									</table:template>
 								</table:Column>
