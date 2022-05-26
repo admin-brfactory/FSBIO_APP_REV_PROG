@@ -88,9 +88,21 @@
 					</table:template>
 				</table:Column>
 				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCodTipo}"/>
+					<table:template>
+						<Text text="{revisaoView>COD_TIPO}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
 					<Label text="{i18n>columnJust}"/>
 					<table:template>
 						<Text text="{revisaoView>JUSTIFICATIVA}" wrapping="false"></Text>
+					</table:template>
+				</table:Column>
+				<table:Column width="auto" hAlign="Center">
+					<Label text="{i18n>columnCodJust}"/>
+					<table:template>
+						<Text text="{revisaoView>ID_JUSTIFICATIVA}" wrapping="false"></Text>
 					</table:template>
 				</table:Column>
 				<table:Column width="auto" hAlign="Center">

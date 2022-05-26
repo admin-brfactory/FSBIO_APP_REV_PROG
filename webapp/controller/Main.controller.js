@@ -30,10 +30,10 @@ sap.ui.define([
 						"produtos": {}
 					}
 				},
-				
+
 				plantaSelecionado: "",
 				dataIniSelecionado: "",
-				dataFimSelecionado: "", 
+				dataFimSelecionado: "",
 				vendedorSelecionado: "",
 				dadosProgCount: 0,
 				dadosProg: [],
@@ -61,8 +61,8 @@ sap.ui.define([
 
 		onClickSearchProg: function() {
 			var oViewModel = this.getView().getModel("revisaoView");
-			var screenTabProg = this.setCheckBoxValueToTab();
-			var systemTabProg = oViewModel.getProperty("/dadosProgForCompare");
+			var screenTabProg = oViewModel.getProperty("/dadosProg");
+			var systemTabProg = this.onConvertTabela();
 			screenTabProg = JSON.stringify(screenTabProg);
 			systemTabProg = JSON.stringify(systemTabProg);
 
@@ -81,6 +81,51 @@ sap.ui.define([
 			};
 		},
 
+		onConvertTabela: function() {
+			var oViewModel = this.getView().getModel("revisaoView");
+			var stabProgForCompare = oViewModel.getProperty("/dadosProgForCompare");
+			
+			for (var i in stabProgForCompare) {
+				if (stabProgForCompare[i].APR_PLANEJAMENTO == "X") {
+					stabProgForCompare[i].APR_PLANEJAMENTO = true;
+				} else {
+					stabProgForCompare[i].APR_PLANEJAMENTO = false;
+				}
+
+				if (stabProgForCompare[i].RJ_PLANEJAMENTO == "X") {
+					stabProgForCompare[i].RJ_PLANEJAMENTO = true;
+				} else {
+					stabProgForCompare[i].RJ_PLANEJAMENTO = false;
+				}
+
+				if (stabProgForCompare[i].APR_LOGISTICA == "X") {
+					stabProgForCompare[i].APR_LOGISTICA = true;
+				} else {
+					stabProgForCompare[i].APR_LOGISTICA = false;
+				}
+
+				if (stabProgForCompare[i].RJ_LOGISTICA == "X") {
+					stabProgForCompare[i].RJ_LOGISTICA = true;
+				} else {
+					stabProgForCompare[i].RJ_LOGISTICA = false;
+				}
+
+				if (stabProgForCompare[i].APR_COMERCIAL == "X") {
+					stabProgForCompare[i].APR_COMERCIAL = true;
+				} else {
+					stabProgForCompare[i].APR_COMERCIAL = false;
+				}
+
+				if (stabProgForCompare[i].RJ_COMERCIAL == "X") {
+					stabProgForCompare[i].RJ_COMERCIAL = true;
+				} else {
+					stabProgForCompare[i].RJ_COMERCIAL = false;
+				}
+
+			}
+			return stabProgForCompare;
+		},
+
 		onSearchProg: function() {
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
@@ -88,7 +133,7 @@ sap.ui.define([
 			oViewModel.setProperty("/vendedorSelecionado", this.getView().byId("filtroVendedor").getSelectedKey());
 			oViewModel.setProperty("/dataIniSelecionado", this.getView().byId("dataIni").getDateValue());
 			oViewModel.setProperty("/dataFimSelecionado", this.getView().byId("dataFim").getDateValue());
-			var usuario = ""//sap.ushell.Container.getService("UserInfo").getId();
+			var usuario = sap.ushell.Container.getService("UserInfo").getId();
 			var planta = oViewModel.getProperty("/plantaSelecionado");
 			var vendedor = oViewModel.getProperty("/vendedorSelecionado");
 			var dataIni = oViewModel.getProperty("/dataIniSelecionado");
@@ -122,9 +167,49 @@ sap.ui.define([
 						var tabProg = JSON.parse(oData.TAB_PROGS);
 						var tabProgForCompare = JSON.parse(oData.TAB_PROGS);
 						var tabProgExport = JSON.parse(oData.TAB_PROGS);
+
+						for (var i in tabProg) {
+							if (tabProg[i].APR_PLANEJAMENTO == "X") {
+								tabProg[i].APR_PLANEJAMENTO = true;
+							} else {
+								tabProg[i].APR_PLANEJAMENTO = false;
+							}
+
+							if (tabProg[i].RJ_PLANEJAMENTO == "X") {
+								tabProg[i].RJ_PLANEJAMENTO = true;
+							} else {
+								tabProg[i].RJ_PLANEJAMENTO = false;
+							}
+
+							if (tabProg[i].APR_LOGISTICA == "X") {
+								tabProg[i].APR_LOGISTICA = true;
+							} else {
+								tabProg[i].APR_LOGISTICA = false;
+							}
+
+							if (tabProg[i].RJ_LOGISTICA == "X") {
+								tabProg[i].RJ_LOGISTICA = true;
+							} else {
+								tabProg[i].RJ_LOGISTICA = false;
+							}
+
+							if (tabProg[i].APR_COMERCIAL == "X") {
+								tabProg[i].APR_COMERCIAL = true;
+							} else {
+								tabProg[i].APR_COMERCIAL = false;
+							}
+
+							if (tabProg[i].RJ_COMERCIAL == "X") {
+								tabProg[i].RJ_COMERCIAL = true;
+							} else {
+								tabProg[i].RJ_COMERCIAL = false;
+							}
+
+						}
+
 						oViewModel.setProperty("/dadosProg", tabProg);
-						oViewModel.setProperty("/dadosProgForCompare", tabProgForCompare);
 						oViewModel.setProperty("/dadosProgExport", tabProgExport);
+						oViewModel.setProperty("/dadosProgForCompare", tabProgForCompare);
 						oViewModel.setProperty("/dadosProgCount", tabProg.length);
 						this.trataDadosExport("/dadosProgExport");
 					} else {
@@ -151,7 +236,7 @@ sap.ui.define([
 						})
 						oViewModel.setProperty("/listaVendedores", listaVendedores);
 					}
-					
+
 					if (oData.LIST_JUSTIFICATIVA != "[]") {
 						var listaJustificativa = JSON.parse(oData.LIST_JUSTIFICATIVA);
 						listaJustificativa.unshift({
@@ -160,11 +245,11 @@ sap.ui.define([
 						})
 						oViewModel.setProperty("/listaJustificativa", listaJustificativa);
 					}
-					
+
 					if (oData.LIST_TIPOS != "[]") {
 						var listaTiposCota = JSON.parse(oData.LIST_TIPOS);
 						listaTiposCota.unshift({
-							KEY: "",
+							KEY: "00",
 							DESC_TIPO: ""
 						})
 						oViewModel.setProperty("/listaTiposCota", listaTiposCota);
@@ -200,7 +285,8 @@ sap.ui.define([
 			dataIni = Dates[0];
 			dataFim = Dates[1];
 
-			var sURL = "/GET_RELAT_MENSSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
+			var sURL = "/GET_RELAT_MENSSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim +
+				"')";
 
 			sap.ui.core.BusyIndicator.show();
 			oModel.read(sURL, {
@@ -258,7 +344,8 @@ sap.ui.define([
 			dataIni = Dates[0];
 			dataFim = Dates[1];
 
-			var sURL = "/GET_RELAT_SEMANSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" + dataFim + "')";
+			var sURL = "/GET_RELAT_SEMANSet(PLANTA='" + planta + "',VENDEDOR='" + vendedor + "',DATA_INI='" + dataIni + "',DATA_FIM='" +
+				dataFim + "')";
 
 			sap.ui.core.BusyIndicator.show();
 			oModel.read(sURL, {
@@ -484,26 +571,38 @@ sap.ui.define([
 
 		onClickAprovarTodos: function(sID) { // Quando clica no checkBox da coluna marca todos os itens habilitados para aprovação e desebilita a rejeição dos mesmo itens.
 			var oTableRows = this.getView().byId("ProgTable").getRows();
+			var oViewModel = this.getView().getModel("revisaoView")
+			var progTab = oViewModel.getProperty("/dadosProg")
 			var isSelected, index;
 
 			if (sID == "aprvPlanej") {
 				isSelected = this.getView().byId(sID).getSelected();
 
 				if (isSelected == true) {
+					for (var t in progTab) {
+						progTab[t].APR_PLANEJAMENTO = true;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[13].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[13].getAggregation("content")[0].getAggregation("content")[1].setSelected(true);
 							oTableRows[index].getCells()[13].getAggregation("content")[1].getAggregation("content")[1].setEnabled(false); // Desabilita rejeição
 						};
 					}
 
+					oViewModel.refresh(true);
+
 				} else {
+					for (var t in progTab) {
+						progTab[t].APR_PLANEJAMENTO = false;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[13].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[13].getAggregation("content")[0].getAggregation("content")[1].setSelected(false);
 							oTableRows[index].getCells()[13].getAggregation("content")[1].getAggregation("content")[1].setEnabled(true); // Desabilita rejeição
 						};
 					}
+
+					oViewModel.refresh(true);
 
 				}
 
@@ -511,40 +610,60 @@ sap.ui.define([
 				isSelected = this.getView().byId(sID).getSelected();
 
 				if (isSelected == true) {
+					for (var t in progTab) {
+						progTab[t].APR_COMERCIAL = true;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[14].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[14].getAggregation("content")[0].getAggregation("content")[1].setSelected(true);
 							oTableRows[index].getCells()[14].getAggregation("content")[1].getAggregation("content")[1].setEnabled(false); // Desabilita rejeição
 						};
 					};
 
+					oViewModel.refresh(true);
+
 				} else {
+					for (var t in progTab) {
+						progTab[t].APR_COMERCIAL = false;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[14].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[14].getAggregation("content")[0].getAggregation("content")[1].setSelected(false);
 							oTableRows[index].getCells()[14].getAggregation("content")[1].getAggregation("content")[1].setEnabled(true); // Desabilita rejeição
 						};
 					};
+
+					oViewModel.refresh(true);
 
 				}
 			} else if (sID == "aprvlogist") {
 				isSelected = this.getView().byId(sID).getSelected();
 
 				if (isSelected == true) {
+					for (var t in progTab) {
+						progTab[t].APR_LOGISTICA = true;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[15].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[15].getAggregation("content")[0].getAggregation("content")[1].setSelected(true);
 							oTableRows[index].getCells()[15].getAggregation("content")[1].getAggregation("content")[1].setEnabled(false); // Desabilita rejeição
 						};
 					};
 
+					oViewModel.refresh(true);
+
 				} else {
+					for (var t in progTab) {
+						progTab[t].APR_LOGISTICA = false;
+					}
+
 					for (index in oTableRows) {
 						if (oTableRows[index].getCells()[15].getAggregation("content")[0].getAggregation("content")[1].getEnabled() == true) {
-							oTableRows[index].getCells()[15].getAggregation("content")[0].getAggregation("content")[1].setSelected(false);
 							oTableRows[index].getCells()[15].getAggregation("content")[1].getAggregation("content")[1].setEnabled(true); // Desabilita rejeição
 						};
 					};
+
+					oViewModel.refresh(true);
 
 				}
 			}
@@ -675,7 +794,7 @@ sap.ui.define([
 				USUARIO: usuario,
 				DADOS_TROCA: JSON.stringify(excelData)
 			};
-			
+
 			sap.ui.core.BusyIndicator.show();
 			oModel.create("/TROCAR_PROGSet", oEntry, {
 
@@ -687,7 +806,11 @@ sap.ui.define([
 						var oListErro = [];
 						for (var index in oMensagem) {
 							if (oMensagem[index].TYPE == "S") {
-								MessageBox.success(oMensagem[index].MESSAGE);
+								MessageBox.success(oMensagem[index].MESSAGE, {
+									onClose: function(sAction) {
+										this.onSearchProg();
+									}.bind(this)
+								});
 							} else {
 								oListErro.push(oMensagem[index]);
 							}
@@ -710,85 +833,13 @@ sap.ui.define([
 			});
 		},
 
-		setCheckBoxValueToTab: function() { // Registra do array de objeto que corresponde a tabela de programação os valores do checkBox, se estão marcados ou não
-			var oViewModel = this.getView().getModel("revisaoView");
-			var tipoUsuário = oViewModel.getProperty("/tipoUsuario");
-			var oDadosProg = oViewModel.getProperty("/dadosProg");
-			var oTable = this.getView().byId("ProgTable");
-			var oTableRows = oTable.getRows();
-			var index = 0;
-			var selected;
-
-			if (tipoUsuário == "PLANEJAMENTO") {
-				for (index in oTableRows) {
-					selected = oTableRows[index].getCells()[13].getAggregation("content")[0].getAggregation("content")[1].getSelected(); // Valor do Check Box Aprovar
-					if (index < oDadosProg.length) {
-						if (selected == true) {
-							oDadosProg[index].APR_PLANEJAMENTO = "X";
-						} else {
-							oDadosProg[index].APR_PLANEJAMENTO = "";
-						};
-
-						selected = oTableRows[index].getCells()[13].getAggregation("content")[1].getAggregation("content")[1].getSelected(); //Valor do Check Box Rejeitar
-						if (selected == true) {
-							oDadosProg[index].RJ_PLANEJAMENTO = "X";
-						} else {
-							oDadosProg[index].RJ_PLANEJAMENTO = "";
-						};
-
-					};
-				};
-
-			} else if (tipoUsuário == "COMERCIAL") {
-				for (index in oTableRows) {
-					selected = oTableRows[index].getCells()[14].getAggregation("content")[0].getAggregation("content")[1].getSelected(); // Valor do Check Box Aprovar
-					if (index < oDadosProg.length) {
-						if (selected == true) {
-							oDadosProg[index].APR_COMERCIAL = "X";
-						} else {
-							oDadosProg[index].APR_COMERCIAL = "";
-						};
-
-						selected = oTableRows[index].getCells()[14].getAggregation("content")[1].getAggregation("content")[1].getSelected(); //Valor do Check Box Rejeitar
-						if (selected == true) {
-							oDadosProg[index].RJ_COMERCIAL = "X";
-						} else {
-							oDadosProg[index].RJ_COMERCIAL = "";
-						};
-
-					};
-				};
-
-			} else if (tipoUsuário == "LOGISTICA") {
-				for (index in oTableRows) {
-					selected = oTableRows[index].getCells()[15].getAggregation("content")[0].getAggregation("content")[1].getSelected(); // Valor do Check Box Aprovar
-					if (index < oDadosProg.length) {
-						if (selected == true) {
-							oDadosProg[index].APR_LOGISTICA = "X";
-						} else {
-							oDadosProg[index].APR_LOGISTICA = "";
-						};
-
-						selected = oTableRows[index].getCells()[15].getAggregation("content")[1].getAggregation("content")[1].getSelected(); //Valor do Check Box Rejeitar
-						if (selected == true) {
-							oDadosProg[index].RJ_LOGISTICA = "X";
-						} else {
-							oDadosProg[index].RJ_LOGISTICA = "";
-						};
-					};
-
-				};
-			};
-			return oDadosProg;
-		},
-
 		onGravarDadosProg: function() {
-			var oDadosProg;
+			var oViewModel = this.getView().getModel("revisaoView");
+			var oDadosProg = oViewModel.getProperty("/dadosProg");
 
 			MessageBox.confirm("Deseja gravar programação?", {
 				onClose: function(sAction) {
 					if (sAction === "OK") {
-						oDadosProg = this.setCheckBoxValueToTab();
 						this.gravarDadosProg(oDadosProg);
 					};
 				}.bind(this)
@@ -799,6 +850,45 @@ sap.ui.define([
 			var oModel = this.getOwnerComponent().getModel();
 			var oViewModel = this.getView().getModel("revisaoView");
 			var usuario = sap.ushell.Container.getService("UserInfo").getId();
+			var tabDadosProg = sDadosProg;
+
+			for (var i in sDadosProg) {
+				if (sDadosProg[i].APR_PLANEJAMENTO == true) {
+					sDadosProg[i].APR_PLANEJAMENTO = "X";
+				} else {
+					sDadosProg[i].APR_PLANEJAMENTO = "";
+				}
+
+				if (sDadosProg[i].RJ_PLANEJAMENTO == true) {
+					sDadosProg[i].RJ_PLANEJAMENTO = "X";
+				} else {
+					sDadosProg[i].RJ_PLANEJAMENTO = "";
+				}
+
+				if (sDadosProg[i].APR_LOGISTICA == true) {
+					sDadosProg[i].APR_LOGISTICA = "X";
+				} else {
+					sDadosProg[i].APR_LOGISTICA = "";
+				}
+
+				if (sDadosProg[i].RJ_LOGISTICA == true) {
+					sDadosProg[i].RJ_LOGISTICA = "X";
+				} else {
+					sDadosProg[i].RJ_LOGISTICA = "";
+				}
+
+				if (sDadosProg[i].APR_COMERCIAL == true) {
+					sDadosProg[i].APR_COMERCIAL = "X";
+				} else {
+					sDadosProg[i].APR_COMERCIAL = "";
+				}
+
+				if (sDadosProg[i].RJ_COMERCIAL == true) {
+					sDadosProg[i].RJ_COMERCIAL = "X";
+				} else {
+					sDadosProg[i].RJ_COMERCIAL = "";
+				}
+			}
 
 			var oEntry = {
 				USUARIO: usuario,
@@ -937,7 +1027,6 @@ sap.ui.define([
 			var parts = filename.split('.');
 			return parts[parts.length - 1];
 		},
-
 
 		/* TRATAMENTO DE DADOS PARA PRÉ VISUALIZAÇÃO DO ARQUIVO EXCEL - INICIO */
 		fileUploader: function(oEvent) {
@@ -1106,8 +1195,18 @@ sap.ui.define([
 				type: EdmType.String,
 				width: '20'
 			}, {
+				label: 'COD_TIPO',
+				property: 'COD_TIPO',
+				type: EdmType.String,
+				width: '20'
+			}, {
 				label: 'JUSTIFICATIVA',
 				property: 'JUSTIFICATIVA',
+				type: EdmType.String,
+				width: '20'
+			}, {
+				label: 'ID_JUSTIFICATIVA',
+				property: 'ID_JUSTIFICATIVA',
 				type: EdmType.String,
 				width: '20'
 			}, {

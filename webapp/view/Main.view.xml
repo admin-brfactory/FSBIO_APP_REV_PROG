@@ -190,12 +190,12 @@
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_PLANEJAMENTO', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>APR_PLANEJAMENTO', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>APR_PLANEJAMENTO'}"/>
 											</l:HorizontalLayout>
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_PLANEJAMENTO', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>RJ_PLANEJAMENTO', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>RJ_PLANEJAMENTO'}"/>
 											</l:HorizontalLayout>
 										</l:VerticalLayout>
 									</table:template>
@@ -210,12 +210,12 @@
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_COMERCIAL', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>APR_COMERCIAL', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>APR_COMERCIAL'}"/>
 											</l:HorizontalLayout>
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_COMERCIAL', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>RJ_COMERCIAL', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>RJ_COMERCIAL'}"/>
 											</l:HorizontalLayout>
 										</l:VerticalLayout>
 									</table:template>
@@ -230,12 +230,12 @@
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblAprovar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>APR_LOGISTICA', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>APR_LOGISTICA', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>APR_LOGISTICA'}"/>
 											</l:HorizontalLayout>
 											<l:HorizontalLayout>
 												<Text text="{i18n>lblRejeitar}" class="sapUiTinyMarginTop"/>
 												<CheckBox select="onSelectSingleCheckBox" enabled="{path: 'revisaoView>RJ_LOGISTICA', formatter: '.formatter.checkBoxEnabled'}"
-													selected="{path: 'revisaoView>RJ_LOGISTICA', formatter: '.formatter.formatCheckBox'}"/>
+													selected="{path: 'revisaoView>RJ_LOGISTICA'}"/>
 											</l:HorizontalLayout>
 										</l:VerticalLayout>
 									</table:template>
